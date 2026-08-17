@@ -96,8 +96,4 @@ degradation modes.
 
 ## What I'd do next
 
-The external APIs are currently deterministic simulations, and reliability history is held only
-in memory. Next steps would be SQLite-backed reliability history, bounded-concurrency async fan-out
-across SKUs, online Bayesian reliability updates, drift detection for inter-source agreement, real
-connectors behind the `Source` protocol, OpenTelemetry traces, a human-in-the-loop escalation queue,
-and learned thresholds validated against operational data.
+Reliability history is held only in memory. Next steps would be SQLite database reliability history.
