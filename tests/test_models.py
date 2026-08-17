@@ -4,9 +4,7 @@ from pydantic import ValidationError
 from reconciler.models import DecisionType, SkuReconciliation
 
 
-def _reconciliation(
-    status: DecisionType, reconciled_quantity: int | None
-) -> SkuReconciliation:
+def _reconciliation(status: DecisionType, reconciled_quantity: int | None) -> SkuReconciliation:
     return SkuReconciliation(
         sku="SKU-A",
         status=status,

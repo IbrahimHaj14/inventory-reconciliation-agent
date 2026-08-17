@@ -102,12 +102,8 @@ def render_template(report: ReconciliationReport) -> str:
         "Sources:",
     ]
     health_by_source = {health.source: health for health in report.source_health}
-    used_sources = {
-        source for sku in report.skus for source in sku.contributing_sources
-    }
-    distrusted_sources = {
-        source for sku in report.skus for source in sku.distrusted_sources
-    }
+    used_sources = {source for sku in report.skus for source in sku.contributing_sources}
+    distrusted_sources = {source for sku in report.skus for source in sku.distrusted_sources}
     for source in _ordered_sources(report):
         state = _source_state(source, report, used_sources, distrusted_sources)
         lines.append(_render_source(source, state, health_by_source.get(source)))

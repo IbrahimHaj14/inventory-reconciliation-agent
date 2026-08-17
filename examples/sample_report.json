@@ -1,0 +1,146 @@
+{
+  "generated_at": "2026-08-17T20:59:39.349610Z",
+  "scenario": "contradiction",
+  "sources_queried": [
+    "internal_db",
+    "warehouse_api",
+    "supplier_feed"
+  ],
+  "sources_skipped": [],
+  "source_health": [
+    {
+      "source": "internal_db",
+      "freshness": 0.9330329915368074,
+      "latency_health": 1.0,
+      "reliability": 0.5,
+      "corroboration": 1.0,
+      "trust": 0.8182004953629862,
+      "circuit_state": "closed",
+      "reason": "Accepted internal_db: age=12.000s, latency=0.050s, intrinsic trust=0.746."
+    },
+    {
+      "source": "warehouse_api",
+      "freshness": 0.8408964152537145,
+      "latency_health": 0.8333333333333334,
+      "reliability": 0.5,
+      "corroboration": 1.0,
+      "trust": 0.7735255675095641,
+      "circuit_state": "closed",
+      "reason": "Accepted warehouse_api: age=30.000s, latency=0.060s, intrinsic trust=0.687."
+    },
+    {
+      "source": "supplier_feed",
+      "freshness": 0.7711054127039704,
+      "latency_health": 0.6624999999999999,
+      "reliability": 0.5,
+      "corroboration": 1.0,
+      "trust": 0.7291902693768039,
+      "circuit_state": "closed",
+      "reason": "Accepted supplier_feed: age=45.000s, latency=0.080s, intrinsic trust=0.630."
+    }
+  ],
+  "decision_log": [
+    {
+      "step": 1,
+      "decision": "query",
+      "subject": "internal_db",
+      "rationale": "Accepted internal_db: age=12.000s, latency=0.050s, intrinsic trust=0.746.",
+      "evidence": {
+        "latency_s": 0.05,
+        "freshness": 0.9330329915368074,
+        "latency_health": 1.0,
+        "reliability": 0.5,
+        "trust": 0.745832245245701,
+        "priority": 0.6830201283771977,
+        "age_s": 12.0
+      },
+      "timestamp": "2026-08-17T20:59:39.349610Z"
+    },
+    {
+      "step": 2,
+      "decision": "query",
+      "subject": "contradiction",
+      "rationale": "Current confidence is insufficient, so another source will be queried.",
+      "evidence": {
+        "confidence": 0.745832245245701,
+        "margin": 1.0
+      },
+      "timestamp": "2026-08-17T20:59:39.349610Z"
+    },
+    {
+      "step": 3,
+      "decision": "query",
+      "subject": "warehouse_api",
+      "rationale": "Accepted warehouse_api: age=30.000s, latency=0.060s, intrinsic trust=0.687.",
+      "evidence": {
+        "latency_s": 0.06,
+        "freshness": 0.8408964152537145,
+        "latency_health": 0.8333333333333334,
+        "reliability": 0.5,
+        "trust": 0.6870707265380898,
+        "priority": 0.6484197773255048,
+        "age_s": 30.0,
+        "baseline_s": 0.05
+      },
+      "timestamp": "2026-08-17T20:59:39.349610Z"
+    },
+    {
+      "step": 4,
+      "decision": "query",
+      "subject": "contradiction",
+      "rationale": "Contradictory evidence requires another source as a tie-breaker.",
+      "evidence": {
+        "confidence": 0.015292813363764127,
+        "margin": 0.041008721361265855
+      },
+      "timestamp": "2026-08-17T20:59:39.349610Z"
+    },
+    {
+      "step": 5,
+      "decision": "query",
+      "subject": "supplier_feed",
+      "rationale": "Accepted supplier_feed: age=45.000s, latency=0.080s, intrinsic trust=0.630.",
+      "evidence": {
+        "latency_s": 0.08,
+        "freshness": 0.7711054127039704,
+        "latency_health": 0.6624999999999999,
+        "reliability": 0.5,
+        "trust": 0.6302845308002046,
+        "priority": 0.620928906036742,
+        "age_s": 45.0,
+        "baseline_s": 0.05299999999999999
+      },
+      "timestamp": "2026-08-17T20:59:39.349610Z"
+    },
+    {
+      "step": 6,
+      "decision": "finalize",
+      "subject": "contradiction",
+      "rationale": "Finalized after all eligible source queries and retries were exhausted.",
+      "evidence": {
+        "queried_sources": 3.0,
+        "configured_sources": 3.0
+      },
+      "timestamp": "2026-08-17T20:59:39.349610Z"
+    }
+  ],
+  "skus": [
+    {
+      "sku": "SKU-A",
+      "status": "flag_contradiction",
+      "reconciled_quantity": null,
+      "confidence": 0.17198262638892553,
+      "support": 0.5157969215799301,
+      "margin": 0.3334308895487938,
+      "contributing_sources": [
+        "internal_db",
+        "supplier_feed"
+      ],
+      "distrusted_sources": [
+        "warehouse_api"
+      ],
+      "note": "Refused because trusted sources remain contradictory."
+    }
+  ],
+  "overall_note": "Finalized after exhausting eligible source evidence."
+}

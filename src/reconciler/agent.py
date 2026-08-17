@@ -130,11 +130,7 @@ def _assess_result(
         runtime.failures,
         settings.wilson_z,
     )
-    gate = (
-        1.0
-        if assessed_result.outcome is QueryOutcome.OK and freshness_score > 0.0
-        else 0.0
-    )
+    gate = 1.0 if assessed_result.outcome is QueryOutcome.OK and freshness_score > 0.0 else 0.0
     trust = geometric_trust(
         [
             (freshness_score, settings.w_freshness),
@@ -276,9 +272,7 @@ def _finalize_skus(
         settings,
     )
     final_candidates: dict[str, list[Candidate]] = {sku: [] for sku in spec.skus}
-    source_corroborations: dict[SourceName, list[float]] = {
-        source: [] for source in spec.sources
-    }
+    source_corroborations: dict[SourceName, list[float]] = {source: [] for source in spec.sources}
     source_trusts: dict[SourceName, list[float]] = {source: [] for source in spec.sources}
 
     for sku in spec.skus:
@@ -312,9 +306,7 @@ def _finalize_skus(
         corroboration_values = source_corroborations[source]
         trust_values = source_trusts[source]
         corroboration_score = (
-            sum(corroboration_values) / len(corroboration_values)
-            if corroboration_values
-            else 1.0
+            sum(corroboration_values) / len(corroboration_values) if corroboration_values else 1.0
         )
         if trust_values:
             final_trust = sum(trust_values) / len(trust_values)
@@ -478,10 +470,9 @@ async def run_agent(
         )
 
         if not successful:
-            can_retry = (
-                attempts[selected] <= settings.max_retries_per_source
-                and breakers[selected].allow(run_time_s)
-            )
+            can_retry = attempts[selected] <= settings.max_retries_per_source and breakers[
+                selected
+            ].allow(run_time_s)
             if can_retry:
                 remaining_retries = settings.max_retries_per_source - attempts[selected] + 1
                 _log(
@@ -525,9 +516,7 @@ async def run_agent(
                     source.value,
                     f"Skipped {source.value} because existing evidence is decisive.",
                     {
-                        "confidence": min(
-                            result.confidence for result in provisional.values()
-                        ),
+                        "confidence": min(result.confidence for result in provisional.values()),
                         "margin": min(result.margin for result in provisional.values()),
                     },
                 )

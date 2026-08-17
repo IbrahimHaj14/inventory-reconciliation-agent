@@ -27,8 +27,7 @@ def _health_by_source(report: ReconciliationReport) -> dict[SourceName, SourceHe
 
 def _assert_refusals_have_no_value(report: ReconciliationReport) -> None:
     assert all(
-        sku.status not in REFUSAL_STATUSES or sku.reconciled_quantity is None
-        for sku in report.skus
+        sku.status not in REFUSAL_STATUSES or sku.reconciled_quantity is None for sku in report.skus
     )
 
 
@@ -63,8 +62,7 @@ async def test_slow_source_has_reduced_latency_health_and_trust() -> None:
     assert all(slow_health.latency_health < health.latency_health for health in other_health)
     assert all(slow_health.trust < health.trust for health in other_health)
     assert any(
-        record.subject == SourceName.WAREHOUSE_API.value
-        and "latency" in record.rationale.lower()
+        record.subject == SourceName.WAREHOUSE_API.value and "latency" in record.rationale.lower()
         for record in report.decision_log
     )
 
