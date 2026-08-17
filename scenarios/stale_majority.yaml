@@ -1,0 +1,7 @@
+name: stale_majority
+seed: 42
+skus: [SKU-A]
+sources:
+  internal_db: {outcome: stale, latency_s: 0.05, age_s: 3600, records: {SKU-A: 999}}
+  warehouse_api: {outcome: stale, latency_s: 0.06, age_s: 3600, records: {SKU-A: 999}}
+  supplier_feed: {outcome: ok, latency_s: 0.08, age_s: 45, records: {SKU-A: 412}}

@@ -1,0 +1,7 @@
+name: total_blackout
+seed: 42
+skus: [SKU-A]
+sources:
+  internal_db: {outcome: unavailable, latency_s: 0.05, age_s: 12, records: {}}
+  warehouse_api: {outcome: unavailable, latency_s: 0.06, age_s: 30, records: {}}
+  supplier_feed: {outcome: stale, latency_s: 0.08, age_s: 3600, records: {SKU-A: 412}}

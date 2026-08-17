@@ -1,0 +1,7 @@
+name: one_source_down
+seed: 42
+skus: [SKU-A]
+sources:
+  internal_db: {outcome: ok, latency_s: 0.05, age_s: 12, records: {SKU-A: 412}}
+  warehouse_api: {outcome: unavailable, latency_s: 0.06, age_s: 30, records: {}}
+  supplier_feed: {outcome: ok, latency_s: 0.08, age_s: 45, records: {SKU-A: 411}}
